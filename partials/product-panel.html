@@ -1,0 +1,64 @@
+<section>
+
+  <ul class=" nav nav-pills" >
+	 	<li ng-class=" {active: panel.isSelected(1)} " style="margin-left:35%;">
+    		<a href ng-click="panel.selectTab(1) ">Description</a>
+		</li>
+	 	<li ng-class=" {active: panel.isSelected(2)} ">
+	    	<a href ng-click="panel.selectTab(2)">product/service</a>
+	 	</li>
+    <li ng-class=" {active: panel.isSelected(3)} ">
+	    	<a href ng-click="panel.selectTab(3)">review</a>
+	 	</li>
+	</ul>	
+
+	   <div class="panel" ng-show="panel.isSelected(1)">
+	      	 <h4 style="color:red;">Description</h4>
+	      	 <p>{{product.description}}</p>
+      </div>
+      <div class="panel" ng-show="panel.isSelected(2)">
+            <h4 style="color:red;">product/service</h4>
+            <blockquote ng-repeat="spec in product.specs">
+             <cite>product:{{spec.products}}</cite><br>
+             <cite>service:{{spec.services}}</cite>
+            </blockquote>
+      </div>
+      <div class="panel" ng-show="panel.isSelected(3)">
+          	<h4 style="color:red;">review</h4>
+          	<blockquote ng-repeat="review in product.reviews">
+          		<b>stars:{{review.stars}}</b>
+          		{{review.body}}
+          		<cite>by:{{review.author}}</cite>
+            </blockquote>
+      
+
+        <div>
+          <form name="reviewForm" ng-controller="ReviewController as ReviewCtrl" 
+                                  ng-submit=" reviewForm.$valid && ReviewCtrl.addReview(product)" novalidate>
+          	<blockquote>
+          		<b>stars:{{ReviewCtrl.review.stars}}</b>
+          		{{ReviewCtrl.review.body}}<br>
+          		<cite>by:{{ReviewCtrl.review.author}}</cite>
+          	</blockquote>
+            <label> select stars:</label>
+          	    <select ng-model="ReviewCtrl.review.stars" required>
+          			<option value="1">1</option>
+          			<option value="2">2</option>
+          			<option value="3">3</option>
+          			<option value="4">4</option>
+          			<option value="5">5</option>
+                </select><br>
+                <label>Remarks:</label>
+                <textarea ng-model="ReviewCtrl.review.body" required></textarea><br>
+                <label>By:</label>
+                <input ng-model="ReviewCtrl.review.author" type="email" required/><br>
+                <style type="text/css">
+                .ng-invalid.ng-dirty{border-color: #FA787E;}
+                .ng-valid.ng-dirty{border-color: #78FA89}
+                </style>
+                <div> validation is {{reviewForm.$valid}}</div>
+                <input type="submit" value="submit" />
+        	</form>
+        </div> 
+   </div>
+</section>

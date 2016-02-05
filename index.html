@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="store">
+	<head>
+		<link rel="stylesheet" type="text/css" href="./dependencies/bootstrap.min.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+	</head>
+	<body ng-controller="StoreController as store">
+		<div>
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="product in store.product">
+			       <h1 style="text-align:center;color:green;">{{product.name | uppercase}} </h1>
+			       <em class="pull-right"><label>Rating:{{product.rating}}</label> </em>
+	               <p ng-include = "'./partials/product.html'"></p>
+                  <img ng-src="{{product.images}}" height="120px" width="120px" class="center-block" /><br>
+		    
+		          <product-panel></product-panel>          
+        
+                </li>
+            </ul>
+        </div>
+    
+        <script type="text/javascript" src="./dependencies/angular.min.js"></script>
+		<script type="text/javascript" src="./application/main.js"></script>
+        <script type="text/javascript" src="./application/productcontent.js"></script>
+	</body>
+</html>
